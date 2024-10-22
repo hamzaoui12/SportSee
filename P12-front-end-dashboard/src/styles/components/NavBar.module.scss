@@ -1,0 +1,104 @@
+.topNav {
+  z-index: 2;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 16rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #020203;
+  width: 100%;
+
+  @media screen and (max-width: 1200px) {
+    gap: 4rem;
+  }
+
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      width: 3rem;
+    }
+
+    h1 {
+      margin: 0;
+      color: #E60001;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+  }
+
+  .links {
+    width: 100%;
+    padding: 0 9rem 0 4rem;
+    color: white;
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.5rem;
+
+      li:hover {
+        scale: 1.02;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .links {
+      padding: 0 4rem;
+
+      ul {
+        justify-content: center;
+        gap: 7rem;
+      }
+    }
+  }
+}
+
+.sideNav {
+  z-index: 1;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10rem;
+  height: 100%;
+  width: 7%;
+  padding-top: 5rem;
+  background-color: #020203;
+
+  @media screen and (max-width: 1200px) {
+    width: 10%;
+  }
+
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    img {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 0.7rem;
+      width: 2rem;
+    }
+
+    img:hover {
+      cursor: pointer;
+      scale: 1.02;
+    }
+  }
+
+  span {
+    rotate: -90deg;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    color: white;
+  }
+}
