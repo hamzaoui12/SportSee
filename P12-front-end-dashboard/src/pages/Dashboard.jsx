@@ -1,6 +1,7 @@
 import styles from "@/styles/pages/Dashboard.module.scss";
+import DailyActivityChart from "@/components/ui/DailyActivityChart";
 
-
+import { getUserActivity } from "@/web/services/getUserActivity";
 import { getUserInfo } from "@/web/services/getUserInfo";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,8 @@ const DashboardPage = () => {
   const [user, setUser] = useState(null);
   const [keyData, setKeyData] = useState(null);
   const [error, setError] = useState(null);
+  const [userActivity, setUserActivity] = useState(null);
+
 
   const fetchUserInfo = async () => {
     try {
@@ -19,8 +22,18 @@ const DashboardPage = () => {
     }
   };
 
+  const fetchUserActivity = async () => {
+    try {
+      const { data } = await getUserActivity();
+      setUserActivity(data.sessions);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   useEffect(() => {
     fetchUserInfo();
+    fetchUserActivity();
     });
 
     
@@ -39,6 +52,14 @@ const DashboardPage = () => {
         <span className={styles.congrats}>
           Félicitation ! Vous avez explosé vos objectifs hier 👏
         </span>
+
+      </div>
+      <div className={styles.data}>
+        <div className={styles.charts}>
+          <div className={styles.activity}>
+            <DailyActivityChart data={userActivity} />
+          </div>
+        </div>
       </div>
     </div>
   );

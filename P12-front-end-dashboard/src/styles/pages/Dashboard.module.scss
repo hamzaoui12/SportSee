@@ -29,5 +29,27 @@
       left: 0.2rem;
     }
   }
+  .data {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    .charts {
+      display: flex;
+      gap: 2rem;
+      flex-direction: column;
+      width: 65%;
+
+      @media screen and (max-width: 1200px) {
+        width: 70%;
+      }
+
+      .activity {
+        background-color: #fbfbfb;
+        padding: 1rem 1.5rem;
+        border-radius: 0.8rem;
+      }
+    }
+
+  }
 
 }
