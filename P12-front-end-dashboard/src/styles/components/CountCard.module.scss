@@ -1,0 +1,61 @@
+.countCardContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 95%;
+  background-color: #f7f7f7;
+  border-radius: 0.8rem;
+  padding: 2rem 1rem;
+
+  .iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.4rem;
+    padding: 1.5rem;
+
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    @media screen and (max-width: 1200px) {
+      img {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+
+  .pink {
+    background-color: #FFD3E0;
+  }
+
+  .blue {
+    background-color: #D3EFFF;
+  }
+
+  .yellow {
+    background-color: #FFFAE6;
+  }
+
+  .red {
+    background-color: #FFD3D3;
+  }
+
+
+  .text {
+    display: flex;
+    flex-direction: column;
+
+    .count {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .unit {
+      font-size: 1rem;
+      color: #9C9EAC;
+    }
+  }
+}

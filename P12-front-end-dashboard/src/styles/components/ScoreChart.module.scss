@@ -1,0 +1,37 @@
+.scoreChartContainer {
+  background-color: #f7f7f7;
+  border-radius: 0.8rem;
+  padding: 1rem 2rem;
+  width: 30%;
+
+  @media screen and (max-width: 1200px) {
+    padding: 1.7rem 2rem;
+    height: 12.5rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    color: #20253a;
+  }
+
+  .label {
+    font-size: 1rem;
+    fill: #74798C;
+
+    .scoreValue {
+      font-size: 1.5rem;
+      fill: #20253a;
+      font-weight: bold;
+    }
+
+    .scoreText {
+      font-size: 1rem;
+      fill: #74798C;
+
+      @media screen and (max-width: 1200px) {
+        font-size:  0.8rem;
+        
+      }
+    }
+  }
+}
