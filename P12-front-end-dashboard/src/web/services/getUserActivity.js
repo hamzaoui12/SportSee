@@ -4,7 +4,7 @@ import { api } from "@/web/helper/axiosClient";
 export const getUserActivity = async () => {
   try {
     const response = await api.get(endpoints.userActivity);
-    return response.data;
+    return { data: response.data };
   } catch (error) {
     return { error: error.response?.data?.message || error.message };
   }

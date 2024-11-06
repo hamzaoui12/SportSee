@@ -39,7 +39,7 @@ const DashboardPage = () => {
     if (data) {
       setUser(data.data.userInfos);
       setKeyData(data.data.keyData);
-      setScore(data.data.score);
+      setScore(data.data.todayScore);
     }
   };
 
