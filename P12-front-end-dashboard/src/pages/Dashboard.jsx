@@ -18,50 +18,82 @@ const DashboardPage = () => {
   const [userActivity, setUserActivity] = useState(null);
   const [userAverageSessions, setUserAverageSessions] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({
+    userInfo: null,
+    userActivity: null,
+    userAverageSessions: null,
+    userPerformance: null,
+  });
 
   const fetchUserInfo = async () => {
-    try {
-      const { data } = await getUserInfo();
-      setUser(data.userInfos);
-      setKeyData(data.keyData);
-      setScore(data.todayScore);
-    } catch (error) {
-      setError(error);
+    const { data, error } = await getUserInfo();
+
+    if (error) {
+      setError((prev) => ({
+        ...prev,
+        userInfo: error,
+      }));
+      return;
+    }
+
+    if (data) {
+      setUser(data.data.userInfos);
+      setKeyData(data.data.keyData);
+      setScore(data.data.score);
     }
   };
 
   const fetchUserActivity = async () => {
-    try {
-      const { data } = await getUserActivity();
-      setUserActivity(data.sessions);
-    } catch (error) {
-      setError(error);
+    const { data, error } = await getUserActivity();
+
+    if (error) {
+      setError((prev) => ({
+        ...prev,
+        userActivity: error,
+      }));
+      return;
+    }
+
+    if (data) {
+      setUserActivity(data.data.sessions);
     }
   };
 
   const fetchUserAverageSessions = async () => {
-    try {
-      const { data } = await getUserAverageSessions();
-      setUserAverageSessions(data.sessions);
-    } catch (error) {
-      setError(error);
+    const { data, error } = await getUserAverageSessions();
+
+    if (error) {
+      setError((prev) => ({
+        ...prev,
+        userAverageSessions: error,
+      }));
+      return;
+    }
+
+    if (data) {
+      setUserAverageSessions(data.data.sessions);
     }
   };
 
   const fetchUserPerformance = async () => {
-    try {
-      const { data } = await getUserPerformance();
+    const { data, error } = await getUserPerformance();
 
-      let transformedData = data.data.map((item) => ({
+    if (error) {
+      setError((prev) => ({
+        ...prev,
+        userPerformance: error,
+      }));
+      return;
+    }
+
+    if (data) {
+      let transformedData = data.data.data.map((item) => ({
         domain:
-          data.kind[item.kind].charAt(0).toUpperCase() +
-          data.kind[item.kind].slice(1),
+          data.data.kind[item.kind].charAt(0).toUpperCase() +
+          data.data.kind[item.kind].slice(1),
         value: item.value,
       }));
-
       transformedData.sort((a, b) => b.domain.length - a.domain.length);
-
       const orderedData = [];
       orderedData.push(transformedData.find((d) => d.domain === "Endurance"));
       orderedData.push(transformedData.find((d) => d.domain === "Strength"));
@@ -69,10 +101,7 @@ const DashboardPage = () => {
       orderedData.push(transformedData.find((d) => d.domain === "Intensity"));
       orderedData.push(transformedData.find((d) => d.domain === "Cardio"));
       orderedData.push(transformedData.find((d) => d.domain === "Speed"));
-
       setUserPerformance(orderedData);
-    } catch (error) {
-      setError(error);
     }
   };
 
@@ -81,10 +110,23 @@ const DashboardPage = () => {
     fetchUserActivity();
     fetchUserAverageSessions();
     fetchUserPerformance();
-  });
+  }, []);
+
+  if (
+    error.userInfo ||
+    error.userActivity ||
+    error.userAverageSessions ||
+    error.userPerformance
+  ) {
+    return (
+      <div className={styles.error}>
+        <h1>Une erreur est survenue lors de la récupération des données !</h1>
+      </div>
+    );
+  }
 
   if (!user || !keyData) {
-    return <div>{error}</div>;
+    return <div>Chargement des données...</div>;
   }
 
   const formattedKeyData = [

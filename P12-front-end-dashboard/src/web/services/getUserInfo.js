@@ -6,6 +6,6 @@ export const getUserInfo = async () => {
     const response = await api.get(endpoints.userInfo);
     return response.data;
   } catch (error) {
-    return { error: error.response.data };
+    return { error: error.response?.data?.message || error.message };
   }
 };

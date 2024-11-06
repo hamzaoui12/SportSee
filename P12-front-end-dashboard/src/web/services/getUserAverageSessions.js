@@ -6,6 +6,6 @@ export const getUserAverageSessions = async () => {
     const response = await api.get(endpoints.userAverageSessions);
     return response.data;
   } catch (error) {
-    return { error: error.response.data };
+    return { error: error.response?.data?.message || error.message };
   }
 };
